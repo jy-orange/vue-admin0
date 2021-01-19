@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		// resolve, reject, all, race
+		// resolve() == then(reponse => {}); reject() == catch(error => {})
+		
+		let promise = new Promise((resolve, reject) => {
+			// resolve(1111);
+			reject(2222);
+		});
+		
+		promise.then(reponse => {
+			console.log('成功'+reponse);
+		}).catch(error => {
+			console.log('失败'+error);
+		});
+		
+		// 链式
+		function promise1(status){
+			return new Promise((resolve, reject) => {
+				if(status){
+					console.log('第一个promise成功');
+					resolve('第一个promise返回数据成功');
+				}
+				if(!status){
+					console.log('第一个promise失败');
+					reject('第一个promise返回数据失败');
+				}
+			})
+		}
+		function promise2(status){
+			return new Promise((resolve, reject) => {
+				if(status){
+					console.log('第2个promise成功');
+					resolve('第2个promise返回数据成功');
+				}
+				if(!status){
+					console.log('第2个promise失败');
+					reject('第2个promise返回数据失败');
+				}
+			})
+		}
+		function promise3(status){
+			return new Promise((resolve, reject) => {
+				if(status){
+					console.log('第3个promise成功');
+					resolve('第3个promise返回数据成功');
+				}
+				if(!status){
+					console.log('第3个promise失败');
+					reject('第3个promise返回数据失败');
+				}
+			})
+		}
+		promise1(true).then(reponse => {
+			console.log(reponse);
+			return promise2(true);
+		}).then(reponse => {
+			console.log(reponse);
+			return promise3(true);
+		})then(reponse => {
+			console.log(reponse);
+		}).catch(error => {
+			console.log(error);
+		});
+		
+		// all方法,数组内的promise必须全部回调成功(返回resolve)才会执行then,否则只要有一个执行不成功(返回reject)就会执行catch
+		Promise.all([promise1(true),promise2(true)]).then(reponse => {
+			console.log('全部回调成功');
+		}).catch(error => {
+			console.log('有的可能回调失败了');
+		})
+		
+		// race方法,当在执行时遇到返回结果是resolve(成功)时就会一直执行链式。
+		// race方法: 只要有一个是返回的resolve就代表成功执行then, 但是, 如果数组的第一个值是返回的reject就表示失败执行catch（即不管后面的数组值有多少是返回的resolve都会执行catch）
+		// 可以理解为: 如果数组第一个值返回的resolve那就执行then, 如果数组第一个值返回的reject那就执行catch
+		Promise.race([promise1(true),promise2(false)]).then(reponse => {
+			console.log('race返回成功');
+		}).catch(error => {
+			console.log('race返回失败');
+		})
+	</script>
+</html>

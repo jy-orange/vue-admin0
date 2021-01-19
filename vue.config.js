@@ -9,12 +9,25 @@ module.exports = {
   lintOnSave: false,
   /**
    * webpack配置,see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
+   * 
+   * 安装依赖: npm install svg-sprite-loader -S
    **/
-  chainWebpack: config => {},
+  chainWebpack: (config) => {
+	  const svgRule = config.module.rule("svg");
+	  svgRule.uses.clear();
+	  svgRule
+	  .use("svg-sprite-loader")
+	  .loader("svg-sprite-loader")
+	  .options({
+		  symbolId: "icon-[name]",
+		  include: ["./src/icons"]
+	  });
+  },
   configureWebpack: config => {
     config.resolve = { // 配置解析别名
-      extensions: ['.js', '.json', '.vue'],    // 目录自动添加文件后缀
+      extensions: ['.js', '.json', '.vue'],    // 目录自动添加文件名后缀
       alias: {
+		'vue': 'vue/dist/vue.js',
         '@': path.resolve(__dirname, './src'),
         'public': path.resolve(__dirname, './public'),
         'components': path.resolve(__dirname, './src/components'),
@@ -60,6 +73,15 @@ module.exports = {
     hot: true, // 开启热加载
     hotOnly: false,
     proxy: null, // 设置代理
+	proxy: {	// 跨域
+		'/devApi': {
+			target: "http://www.web-jshtml.cn/productapi",		// api服务器的地址
+			changeOrigin: true,
+			pathRewrite: {
+				'^/devApi': ''
+			}
+		}
+	},
     overlay: {
       // 全屏模式下是否显示脚本错误
       warnings: true,

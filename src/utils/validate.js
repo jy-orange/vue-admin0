@@ -1,8 +1,11 @@
 /**
+ * export将方法暴露出去
+ * 没有使用export default时，一个文件可以使用多个export
+ * 此时外部引用该文件时需要import { fileName1, fileName2, ... }
  * 过滤特殊字符
  */
 export function striptscript(s){
-	var pattern = new RegExp("[`~! %@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")
+	var pattern = new RegExp("[`~! %@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
 	var rs = "";
 	for (var i = 0; i < s.length; i++) {
 		rs = rs+s.substr(i, 1).replace(pattern, '');
