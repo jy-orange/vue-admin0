@@ -1,5 +1,6 @@
 <template>
 	<div id="nav-wrap">
+		<!-- 通过<svg-icon>标签使用全局组件 -->
 		<svg-icon iconClass="Vue" className="Vue"></svg-icon>
 		<el-menu default-active="this.$router.path" class="el-menu-vertical-demo" :collapse="isCollapse" background-color="transparent" text-color="#fff" active-text-color="#fff" router>
 			<template v-for="(item, index) in routers">
@@ -24,16 +25,16 @@
 	export default {
 		name: 'navMenu',
 		setup(props,context){
-			/**************************************************************************
+			/* *************************************************************************
 			 * data数据
 			 */
 			// const isCollapse = ref(false);
 			const routers = reactive(context.root.$router.options.routes);
 			// console.log(routers);
 			// computed 监听  ES6写法
-			const isCollapse = computed(() => context.root.$store.state.isCollapse);
+			const isCollapse = computed(() => context.root.$store.state.layout.isCollapse);
 			
-			/**************************************************************************
+			/* *************************************************************************
 			 * 函数方法
 			 */
 			

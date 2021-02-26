@@ -3,19 +3,30 @@
 		<div class="pull-left head-icon" @click="navMenuState"><svg-icon iconClass="menu" className="menu"></svg-icon></div>
 		<div class="pull-right head-icon">
 			<div class="pull-left user-info">管理员</div>
-			<div class="pull-left head-icon"><svg-icon iconClass="close" className="close" /></div>
+			<div class="pull-left head-icon" @click="exit">
+				<svg-icon iconClass="close" className="close" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { computed } from '@vue/composition-api';
 	export default {
 		setup(props, context){
-			const navMenuState = () => {
-				context.root.$store.commit('SET_COLLAPSE');
+			const navMenuState = () => {  // 菜单栏的收缩
+				context.root.$store.commit('layout/SET_COLLAPSE');
+			}
+			const exit = () => {  // 退出登录
+				root.$store.dispatch('login/exit').then(() => {
+					root.$store.push({  // 路由跳转
+						name: 'Login'
+					})
+				});
 			}
 			return{
-				navMenuState
+				navMenuState,
+				exit
 			}
 		}
 	}
@@ -47,6 +58,7 @@
 			height: 100%;
 			padding: 0 32px;
 			border-right: 1px solid #ededed;
+			cursor: pointer;
 			+ .head-icon {
 				padding: 0 28px;
 			}

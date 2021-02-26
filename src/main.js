@@ -6,10 +6,10 @@ import ElementUI from 'element-ui';
 import VueCompositionApi from '@vue/composition-api';
 import 'element-ui/lib/theme-chalk/index.css';
 import "./icons";	// 引入自定义的组件
+import "./router/premit";
 
 Vue.use(ElementUI);
 Vue.use(VueCompositionApi);
-
 Vue.config.productionTip = false;
 
 // runtime模式(运行时)

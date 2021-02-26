@@ -16,7 +16,7 @@
 		name: 'layout',		// 自定义组件名称
 		components: { LayoutHeader, LayoutMain, LayoutVav },
 		setup(props,context){
-			const menuStatus = computed(() => context.root.$store.state.isCollapse);
+			const menuStatus = computed(() => context.root.$store.state.layout.isCollapse);
 			
 			return {
 				menuStatus

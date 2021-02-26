@@ -7,11 +7,11 @@ module.exports = {
   // eslint-loader 是否在保存的时候检查
   // lintOnSave: true,
   lintOnSave: false,
-  /**
+  /* *
    * webpack配置,see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
    * 
    * 安装依赖: npm install svg-sprite-loader -S
-   **/
+   * */
   chainWebpack: (config) => {
 	  const svgRule = config.module.rule("svg");
 	  svgRule.uses.clear();
@@ -27,7 +27,7 @@ module.exports = {
     config.resolve = { // 配置解析别名
       extensions: ['.js', '.json', '.vue'],    // 目录自动添加文件名后缀
       alias: {
-		'vue': 'vue/dist/vue.js',
+		    'vue': 'vue/dist/vue.js',
         '@': path.resolve(__dirname, './src'),
         'public': path.resolve(__dirname, './public'),
         'components': path.resolve(__dirname, './src/components'),
@@ -75,7 +75,7 @@ module.exports = {
     proxy: null, // 设置代理
 	proxy: {	// 跨域
 		'/devApi': {
-			target: "http://www.web-jshtml.cn/productapi",		// api服务器的地址
+			target: "http://www.web-jshtml.cn/productapi/token",		// api服务器的地址http://www.web-jshtml.cn/productapi
 			changeOrigin: true,
 			pathRewrite: {
 				'^/devApi': ''

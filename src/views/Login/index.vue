@@ -60,7 +60,7 @@
 </template>
 
 <script>
-	/**
+	/* *
 	 * 用户名: 12235678@qq.com		密码: j123456
 	 * setup函数: 用于在组件中使用Composition API的入口
 	 * reactive: 声明单一对象时使用，取得一个对象并返回原始对象的响应数据处理
@@ -76,7 +76,7 @@
 	 * }
 	 * const {x,y} = useMousePosition();
 	 */
-	/**
+	/* *
 	 * 加密方法: basse64、md5、sha1, md5和sha1加密之后不可逆
 	 * 前台密码加密: 在前端先加密一次, sha1('123456') == 'hasuogfayugup7298gdy'(加密后通过该加密方法生成的字符串)
 	 * 后台加密: 接收到字符串 'hasuogfayugup7298gdy', 后台再次加密 md5('hasuogfayugup7298gdy') == 'gyqwfyqkqkte625'
@@ -139,7 +139,7 @@
 				}
 			};
 			
-			/*****************************************************************************************************************
+			/* ****************************************************************************************************************
 			 * 声明数据
 			 */
 			const ruleForm = reactive({		// 表单数据
@@ -176,12 +176,12 @@
 				text: '获取验证码'
 			});
 			
-			/*****************************************************************************************************************
+			/* ****************************************************************************************************************
 			 * 声明函数
 			 * 不建议在一个方法里面做多件不同的事(尽可能只做自己的事不做其他的事)
 			 * 尽量把相同的事情封装到一个方法里面, 通过调用函数进行执行
 			 */
-			/**
+			/* *
 			 * 路由 
 			 * router-link
 			 * 1、不带参数:
@@ -295,7 +295,7 @@
 					password: sha1(ruleForm.password),
 					code: ruleForm.code
 				};
-				Login(requestData).then(response => {
+				context.root.$store.dispatch('login/login', requestData).then(response => {
 					console.log(response);
 					// 路由跳转
 					context.root.$router.push({
@@ -304,6 +304,15 @@
 				}).catch(error => {
 					console.log(error);
 				});
+				/* Login(requestData).then(response => {
+					console.log(response);
+					// 路由跳转
+					context.root.$router.push({
+						name: 'Console'
+					});
+				}).catch(error => {
+					console.log(error);
+				}); */
 			});
 			
 			const register = (() => {		// 注册
@@ -347,14 +356,14 @@
 				// refs[formName].resetFields();
 			});
 			
-			/**
+			/* *
 			 * 生命周期
 			 */
 			onMounted(() => {	// 挂载完成后
 			
 			})
 			
-			/**
+			/* *
 			 * 将声明的东西都return出去
 			 */
 			return {

@@ -8,3 +8,22 @@
 .el-submenu {
 	&.is-active.is-opened .el-submenu__title { background-color:$mainColor !important; }
 }
+
+// 改变一级菜单收起时鼠标悬停时的样式
+.close {
+	.el-submenu {
+		&.is-opened {
+			> .el-submenu__title { background-color: $mainColor !important; }
+		}
+	}
+}
+
+// 改变一级菜单收起时,鼠标悬停时的二级菜单的样式
+.el-menu--vertical {
+	.el-menu {
+		background-color: #344a5f !important;
+		&.el-menu--popup { padding: 0px !important; }
+	}
+	.el-menu-item { line-height: 56px; }
+	.el-menu-item:hover { background-color: $mainColor !important; }
+}
